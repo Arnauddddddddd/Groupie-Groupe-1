@@ -1,13 +1,15 @@
 package engine
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
 
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
-	http.HandleFunc("/index", g.index)
+	http.HandleFunc("/index.html", g.index)
+	fmt.Println("http://localhost:8080/")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return
