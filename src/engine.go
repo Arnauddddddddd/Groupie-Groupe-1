@@ -4,7 +4,7 @@ type Structure struct {
 }
 
 func (g *Structure) Run() {
-	for {
-		g.Server()
-	}
+	g.Init()
+	g.Api()
+	g.Server()
 }
