@@ -59,26 +59,44 @@ func (g *Structure) Api() {
 	}
 	fmt.Println(len(list))
 	for i := 1; i <= len(list); i++ {
-		var apiStruct ApiStruct
-		var artisteStruct ArtistsStruct 
-
-		fmt.Println(i)
-		response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(i))
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer response.Body.Close()
-		if response.StatusCode == http.StatusOK {
-			bodyBytes, err := io.ReadAll(response.Body)
-			if err != nil {log.Fatal(err)}
-			json.Unmarshal(bodyBytes, &artisteStruct)
-		}
-		g.api = append(g.api, apiStruct)
-		g.api[i-1].Artists = artisteStruct
+		g.getArtists(i)
+		g.getLocation(i)
 	}
 
-	fmt.Println(g.api[0].Artists)
+	fmt.Println(g.api[0].Locations)
 
+}
+
+func (g *Structure) getArtists(i int) {
+	var apiStruct ApiStruct
+	var artisteStruct ArtistsStruct 
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(i))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+	if response.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {log.Fatal(err)}
+		json.Unmarshal(bodyBytes, &artisteStruct)
+	}
+	g.api = append(g.api, apiStruct)
+	g.api[i-1].Artists = artisteStruct
+}
+
+func (g *Structure) getLocation(i int) {
+	var locationStruct LocationsStruct 
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + strconv.Itoa(i))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+	if response.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {log.Fatal(err)}
+		json.Unmarshal(bodyBytes, &locationStruct)
+	}
+	g.api[i-1].Locations = locationStruct
 }
 
 
