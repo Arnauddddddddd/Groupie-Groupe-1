@@ -1,12 +1,13 @@
 package engine
 
 type Structure struct {
-	api []ApiStruct
+	artists []ArtistsStruct
 	numberOfGroup int
 }
 
 func (g *Structure) Run() {
 	g.Init()
 	g.Api()
+	g.Search()
 	g.Server()
 }

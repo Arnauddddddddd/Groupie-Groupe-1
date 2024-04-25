@@ -4,7 +4,6 @@ package engine
 
 
 func (g *Structure) Init() {
-	g.api = []ApiStruct{}
+	g.artists = []ArtistsStruct{}
 	g.numberOfGroup = 0
-	
 }

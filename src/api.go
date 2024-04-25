@@ -3,47 +3,42 @@ package engine
 import (
 	//"encoding/json"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"strconv"
 )
 
-type ApiStruct struct {
-	Artists   ArtistsStruct   `json:"artists"`
-	Locations LocationsStruct `json:"locations"`
-	Dates     DatesStruct 	  `json:"dates"`
-	Relation  RelationStruct  `json:"relation"`
-}
+
 
 type ArtistsStruct struct {
-	Id 			 int 		`json:"id"`
-	Image        string   	`json:"image"`
-	Name         string     `json:"name"`
-	Members      []string	`json:"members"`
-	CreationDate int		`json:"creationDate"`
-	FirstAlbum   string		`json:"firstAlbum"`
-	Locations 	 string		`json:"locations"`
-	ConcertDates string		`json:"concertDates"`
-	Relations    string		`json:"relations"`
+	Id 			 int 				`json:"id"`
+	Image        string   			`json:"image"`
+	Name         string    			`json:"name"`
+	Members      []string			`json:"members"`
+	CreationDate int				`json:"creationDate"`
+	FirstAlbum   string				`json:"firstAlbum"`
+	Locations 	 LocationsStruct	`json:"locations"`
+	ConcertDates DatesStruct		`json:"concertDates"`
+	Relations    RelationStruct		`json:"relations"`
 }
 
 type LocationsStruct struct {
-	Id 			 int		`json:"id"`
-	Locations    []string	`json:"locations"`
-	Dates 		 string		`json:"dates"`
+	Id 			 int				`json:"id"`
+	Locations    []string			`json:"locations"`
 }
 
 type DatesStruct struct {
-	Id 			 int		`json:"id"`
-	Dates 		 []string	`json:"dates"`
+	Id 			 int				`json:"id"`
+	Dates 		 []string			`json:"dates"`
 }
 
 type RelationStruct struct {
-	Id			   int		`json:"id"`
-	DatesLocations string	`json:"datesLocations"`
+	Id			   int						`json:"id"`
+	DatesLocations map[string][]string		`json:"datesLocations"`
 }
+
+
 
 func (g *Structure) Api() {
 	var list []string 
@@ -57,18 +52,15 @@ func (g *Structure) Api() {
 		if err != nil {log.Fatal(err)}
 		json.Unmarshal(bodyBytes, &list)
 	}
-	fmt.Println(len(list))
 	for i := 1; i <= len(list); i++ {
 		g.getArtists(i)
 		g.getLocation(i)
+		g.getDates(i)
+		g.getRelations(i)
 	}
-
-	fmt.Println(g.api[0].Locations)
-
 }
 
 func (g *Structure) getArtists(i int) {
-	var apiStruct ApiStruct
 	var artisteStruct ArtistsStruct 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(i))
 	if err != nil {
@@ -80,9 +72,10 @@ func (g *Structure) getArtists(i int) {
 		if err != nil {log.Fatal(err)}
 		json.Unmarshal(bodyBytes, &artisteStruct)
 	}
-	g.api = append(g.api, apiStruct)
-	g.api[i-1].Artists = artisteStruct
+	g.artists = append(g.artists, artisteStruct)
+	g.artists[i-1] = artisteStruct
 }
+
 
 func (g *Structure) getLocation(i int) {
 	var locationStruct LocationsStruct 
@@ -96,7 +89,40 @@ func (g *Structure) getLocation(i int) {
 		if err != nil {log.Fatal(err)}
 		json.Unmarshal(bodyBytes, &locationStruct)
 	}
-	g.api[i-1].Locations = locationStruct
+	g.artists[i-1].Locations = locationStruct
+}
+
+
+func (g *Structure) getDates(i int) {
+	var datesStruct DatesStruct 
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/dates/" + strconv.Itoa(i))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+	if response.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {log.Fatal(err)}
+		json.Unmarshal(bodyBytes, &datesStruct)
+	}
+	g.artists[i-1].ConcertDates = datesStruct
+}
+
+
+
+func (g *Structure) getRelations(i int) {
+	var relationStruct RelationStruct 
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + strconv.Itoa(i))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response.Body.Close()
+	if response.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(response.Body)
+		if err != nil {log.Fatal(err)}
+		json.Unmarshal(bodyBytes, &relationStruct)
+	}
+	g.artists[i-1].Relations = relationStruct
 }
 
 
