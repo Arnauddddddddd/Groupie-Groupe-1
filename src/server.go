@@ -11,7 +11,7 @@ func (g *Structure) Server() {
 	http.HandleFunc("/index.html", g.index)
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
 
-	fmt.Println("http://localhost:8080/")
+	fmt.Println("\nhttp://localhost:8080/")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return
