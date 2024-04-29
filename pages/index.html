@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Groupie Trackers</title>
+    <title>Groupie Tracker</title>
     <link rel="stylesheet" href="../styles/globals.css">
 </head>
 <body>
@@ -13,11 +13,14 @@
             <li><a href="#">EtJsp</a></li>
         </ul>
     </nav>
-
-<h1>{{ .Artists }}</h1>
-<h1>{{ .DateCreation }}</h1>
-<h1>{{ .Members }}</h1>
-
-
+    <header>
+        <video autoplay loop muted>
+            <source src="../videos/headervideo.mp4" type="video/mp4">
+        </video>
+        <h1>Groupie Tracker</h1>
+    </header>
+    <div>
+        <img src="{{ index .Poster 0}}">
+    </div>
 </body>
 </html>
