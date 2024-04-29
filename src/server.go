@@ -6,6 +6,17 @@ import (
 	"net/http"
 )
 
+
+type WebStruct struct{
+	Artists []string
+	Members [][]string
+	DateCreation []int
+}
+
+
+
+
+
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
 	http.HandleFunc("/index.html", g.index)
@@ -20,7 +31,14 @@ func (g *Structure) Server() {
 
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/index.html"))
-	err := tmpl.Execute(w, nil)
+	web := WebStruct {
+		Artists: g.artistsName,
+		Members: g.artistsMembers,
+		DateCreation: g.dateCreation,
+	}
+
+
+	err := tmpl.Execute(w, web)
 	if err != nil {
 		return
 	}
