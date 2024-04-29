@@ -8,6 +8,5 @@ type Structure struct {
 func (g *Structure) Run() {
 	g.Init()
 	g.Api()
-	g.Variable()
 	g.Server()
 }
