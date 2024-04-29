@@ -8,9 +8,13 @@ import (
 
 
 type WebStruct struct{
+	Id []int
 	Artists []string
 	Members [][]string
 	DateCreation []int
+	FirstAlbum []string
+	Poster []string
+	Dates [][]string
 }
 
 
@@ -32,9 +36,13 @@ func (g *Structure) Server() {
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/index.html"))
 	web := WebStruct {
+		Id: g.artistsId,
 		Artists: g.artistsName,
 		Members: g.artistsMembers,
 		DateCreation: g.dateCreation,
+		FirstAlbum: g.firstAlbum,
+		Poster: g.artistsPosters,
+		Dates: g.dates,
 	}
 
 
