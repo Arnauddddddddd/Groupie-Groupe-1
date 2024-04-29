@@ -16,6 +16,10 @@ type WebStruct struct {
 	Dates        [][]string
 }
 
+type NtmStruct struct {
+	Artists []ArtistsStruct
+}
+
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
 	http.HandleFunc("/index.html", g.index)
@@ -31,17 +35,11 @@ func (g *Structure) Server() {
 
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/index.html"))
-	web := WebStruct{
-		Id:           g.artistsId,
-		Artists:      g.artistsName,
-		Members:      g.artistsMembers,
-		DateCreation: g.dateCreation,
-		FirstAlbum:   g.firstAlbum,
-		Poster:       g.artistsPosters,
-		Dates:        g.dates,
+	web2 := NtmStruct{
+		Artists: g.artists,
 	}
 
-	err := tmpl.Execute(w, web)
+	err := tmpl.Execute(w, web2)
 	if err != nil {
 		return
 	}

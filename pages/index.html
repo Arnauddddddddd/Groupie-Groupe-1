@@ -20,7 +20,16 @@
         <h1>Groupie Tracker</h1>
     </header>
     <div>
-        <img src="{{ index .Poster 0}}">
+        {{ range .Artists }}
+        <div class="card">
+            <div>
+                <img src="{{ .Image }}" alt="{{ .Name }}">
+            </div>
+            <div>
+                <h2>{{ .Name }}</h2>
+            </div>
+    </div>
+    {{ end }}
     </div>
 </body>
 </html>

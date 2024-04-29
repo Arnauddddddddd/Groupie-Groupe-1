@@ -1,18 +1,8 @@
 package engine
 
 type Structure struct {
-	artists []ArtistsStruct
+	artists       []ArtistsStruct
 	numberOfGroup int
-
-	artistsName []string
-	artistsMembers [][]string
-	dateCreation []int
-	artistsId []int
-	artistsPosters []string
-	firstAlbum []string
-	locations [][]string
-	dates [][]string
-
 }
 
 func (g *Structure) Run() {
