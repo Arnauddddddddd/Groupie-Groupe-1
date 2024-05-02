@@ -35,20 +35,22 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 			g.sortArtists("Alphabet")
 		case "reverse":
 			g.reverse()
+		case "clear":
+			g.clearArtists()
 		default:
 			fmt.Println(g.action)
 		}
 	}
-	
+
 	search := r.Form.Get("search")
 	if len(search) > 0 {
-		fmt.Println(search)
+		g.searchGroup(search)
 	}
 
 
 
 
-	web := WebStruct{Artists: g.artists,}
+	web := WebStruct{Artists: g.artistsTemp,}
 	err := tmpl.Execute(w, web)
 	if err != nil {
 		return

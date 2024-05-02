@@ -1,7 +1,8 @@
 package engine
 
 type Structure struct {
-	artists       []ArtistsStruct
+	artists		  []ArtistsStruct
+	artistsTemp   []ArtistsStruct
 	numberOfGroup int
 	action		  string
 }

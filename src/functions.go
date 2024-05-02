@@ -1,21 +1,42 @@
 package engine
 
+import "strings"
+
 func (g *Structure) reverse() {
-	for i, j := 0, len(g.artists)-1; i < j; i, j = i+1, j-1 {
-		g.artists[i], g.artists[j] = g.artists[j], g.artists[i]
+	g.artistsTemp = g.artists
+	for i, j := 0, len(g.artistsTemp)-1; i < j; i, j = i+1, j-1 {
+		g.artistsTemp[i], g.artistsTemp[j] = g.artistsTemp[j], g.artistsTemp[i]
 	}
 }
 
 
 func (g *Structure) sortArtists(action string) {
-	for i := 0; i < len(g.artists); i++ {
-		for j := 0; j < len(g.artists)-1; j++ {
-			if sortType(g.artists, i , j , action) {
-				g.artists[i], g.artists[j] = g.artists[j], g.artists[i]
+	g.artistsTemp = g.artists
+	for i := 0; i < len(g.artistsTemp); i++ {
+		for j := 0; j < len(g.artistsTemp)-1; j++ {
+			if sortType(g.artistsTemp, i , j , action) {
+				g.artistsTemp[i], g.artistsTemp[j] = g.artistsTemp[j], g.artistsTemp[i]
 			}
 		}
 	}
 }
+
+
+func (g *Structure) searchGroup(str string) {
+    g.artistsTemp = []ArtistsStruct{} 
+    for i := 0; i < len(g.artists); i++ {
+        if strings.Contains(g.artists[i].Name, str) {
+            g.artistsTemp = append(g.artistsTemp, g.artists[i])
+        }
+    }
+}
+
+
+func (g *Structure) clearArtists() {
+	g.artistsTemp = g.artists
+}
+
+
 
 
 func sortType(list []ArtistsStruct, i int, j int, action string) bool {
@@ -28,4 +49,5 @@ func sortType(list []ArtistsStruct, i int, j int, action string) bool {
 	}
 	return false
 }
+
 
