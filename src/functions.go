@@ -1,6 +1,8 @@
 package engine
 
-import "strings"
+import (
+	"strings"
+)
 
 func (g *Structure) reverse() {
 	g.artistsTemp = g.artists
@@ -25,9 +27,14 @@ func (g *Structure) sortArtists(action string) {
 func (g *Structure) searchGroup(str string) {
     g.artistsTemp = []ArtistsStruct{} 
     for i := 0; i < len(g.artists); i++ {
-        if strings.Contains(g.artists[i].Name, str) {
+        if strings.Contains(strings.ToLower(g.artists[i].Name), strings.ToLower(str)) {
             g.artistsTemp = append(g.artistsTemp, g.artists[i])
         }
+		for j := 0; j < len(g.artists[i].Members); j++ {
+			if strings.Contains(strings.ToLower(g.artists[i].Members[j]), strings.ToLower(str)) && !containsArtist(g.artistsTemp, g.artists[i]) {
+				g.artistsTemp = append(g.artistsTemp, g.artists[i])
+			}
+		}
     }
 }
 
@@ -36,8 +43,14 @@ func (g *Structure) clearArtists() {
 	g.artistsTemp = g.artists
 }
 
-
-
+func containsArtist(elems []ArtistsStruct, v ArtistsStruct) bool {
+	for i := 0; i < len(elems); i++ {
+		if elems[i].Id == v.Id {
+			return true
+		}
+	}
+    return false
+}
 
 func sortType(list []ArtistsStruct, i int, j int, action string) bool {
 	switch action {

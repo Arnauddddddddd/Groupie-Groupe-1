@@ -64,9 +64,7 @@ func (g *Structure) Api() {
 func (g *Structure) getArtists(i int) {
 	var artisteStruct ArtistsStruct 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(i))
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil {log.Fatal(err)}
 	defer response.Body.Close()
 	if response.StatusCode == http.StatusOK {
 		bodyBytes, err := io.ReadAll(response.Body)
@@ -81,9 +79,7 @@ func (g *Structure) getArtists(i int) {
 func (g *Structure) getLocation(i int) {
 	var locationStruct LocationsStruct 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + strconv.Itoa(i))
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil {log.Fatal(err)}
 	defer response.Body.Close()
 	if response.StatusCode == http.StatusOK {
 		bodyBytes, err := io.ReadAll(response.Body)
@@ -97,9 +93,7 @@ func (g *Structure) getLocation(i int) {
 func (g *Structure) getDates(i int) {
 	var datesStruct DatesStruct 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/dates/" + strconv.Itoa(i))
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil {log.Fatal(err)}
 	defer response.Body.Close()
 	if response.StatusCode == http.StatusOK {
 		bodyBytes, err := io.ReadAll(response.Body)
@@ -114,9 +108,7 @@ func (g *Structure) getDates(i int) {
 func (g *Structure) getRelations(i int) {
 	var relationStruct RelationStruct 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + strconv.Itoa(i))
-	if err != nil {
-		log.Fatal(err)
-	}
+	if err != nil {log.Fatal(err)}
 	defer response.Body.Close()
 	if response.StatusCode == http.StatusOK {
 		bodyBytes, err := io.ReadAll(response.Body)
