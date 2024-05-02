@@ -7,18 +7,9 @@ import (
 )
 
 type WebStruct struct {
-	Id           []int
-	Artists      []string
-	Members      [][]string
-	DateCreation []int
-	FirstAlbum   []string
-	Poster       []string
-	Dates        [][]string
-}
-
-type NtmStruct struct {
 	Artists []ArtistsStruct
 }
+
 
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
@@ -28,19 +19,40 @@ func (g *Structure) Server() {
 
 	fmt.Println("\nhttp://localhost:8080/")
 	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		return
-	}
+	if err != nil {return}
 }
 
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/index.html"))
-	web2 := NtmStruct{
-		Artists: g.artists,
+	r.ParseForm()
+	action := r.Form.Get("action")
+	g.action = action
+	if len(g.action) > 0 {
+		switch g.action {
+		case "sortYear":
+			g.sortArtists("Year")
+		case "sortAlphabetic":
+			g.sortArtists("Alphabet")
+		case "reverse":
+			g.reverse()
+		default:
+			fmt.Println(g.action)
+		}
+	}
+	
+	search := r.Form.Get("search")
+	if len(search) > 0 {
+		fmt.Println(search)
 	}
 
-	err := tmpl.Execute(w, web2)
+
+
+
+	web := WebStruct{Artists: g.artists,}
+	err := tmpl.Execute(w, web)
 	if err != nil {
 		return
 	}
 }
+
+

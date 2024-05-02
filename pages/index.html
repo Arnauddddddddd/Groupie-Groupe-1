@@ -20,6 +20,17 @@
         <h1>Groupie Tracker</h1>
     </header>
     <div>
+        <form action="/index"> 
+            <button type="submit" name="action" value="sortYear"> Trie par Année </button>
+            <button type="submit" name="action" value="sortAlphabetic"> Trie Alphabétique </button>
+            <button type="submit" name="action" value="reverse"> inverse le trie </button>
+             
+            <input type="text" name="search">
+            <button type="submit" name="search"> AH </button>
+            
+        </form>
+
+        
         {{ range .Artists }}
         <div class="card">
             <div>
@@ -27,6 +38,8 @@
             </div>
             <div>
                 <h2>{{ .Name }}</h2>
+                <h2>{{ .CreationDate }}</h2>
+
             </div>
     </div>
     {{ end }}

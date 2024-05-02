@@ -3,6 +3,7 @@ package engine
 type Structure struct {
 	artists       []ArtistsStruct
 	numberOfGroup int
+	action		  string
 }
 
 func (g *Structure) Run() {
