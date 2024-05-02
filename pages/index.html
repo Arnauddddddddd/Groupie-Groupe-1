@@ -19,18 +19,26 @@
         </video>
         <h1>Groupie Tracker</h1>
     </header>
-    <div>
-        <form action="/index"> 
-            <button type="submit" name="action" value="sortYear"> Trie par Année </button>
-            <button type="submit" name="action" value="sortAlphabetic"> Trie Alphabétique </button>
-            <button type="submit" name="action" value="reverse"> inverse le trie </button>
-             
-            <input type="text" name="search">
-            <button type="submit" name="search"> AH </button>
-            
-        </form>
 
-        
+        <div>
+            <form>
+                <div class="input-group">
+                    <input type="text" name="search">
+                    <button class="searchButton" type="submit" name="search">Rechercher</button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <form action="/index">
+                <button class="searchButton" type="submit" name="action" value="sortYear"> Trie par Année </button>
+                <button class="searchButton" type="submit" name="action" value="sortAlphabetic"> Trie Alphabétique </button>
+                <button class="searchButton" type="submit" name="action" value="reverse"> inverse le trie </button>
+                <button class="searchButton" type="submit" name="action" value="clear"> clear </button>
+            </form>
+        </div>
+
+    <div>
         {{ range .Artists }}
         <div class="card">
             <div>
