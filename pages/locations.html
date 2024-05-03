@@ -9,8 +9,18 @@
 <body>  
 
 
-    ffffffffffffffffffffffff
-    {{ index .Countries 0 }}
+    <div class="container">
+        {{ range .Countries }}
+        <div class="card">
+            
+            <div>
+                <h2>{{ .Name }}</h2>
+            </div>
+            {{ range .Cities }}
+                {{ .CityName }}
+            {{ end }}
+    </div>
+    {{ end }}
 
 
 </body>
