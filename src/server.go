@@ -56,6 +56,8 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 }
 
 
+
+
 func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/locations.html"))
 	web2 := WebStruct2{Countries: g.countries,}
