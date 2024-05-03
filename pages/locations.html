@@ -7,6 +7,19 @@
 </head>
 
 <body>  
+    <nav class="navigation">
+        <ul class="left-menu">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="#">EtJsp</a></li>
+        </ul>
+    </nav>
+    <header>
+        <video autoplay loop muted>
+            <source src="../videos/headervideo.mp4" type="video/mp4">
+        </video>
+        <h1>Groupie Tracker</h1>
+    </header>
 
 
     <div class="container">
@@ -14,10 +27,14 @@
         <div class="card">
             
             <div>
-                <h2>{{ .Name }}</h2>
+                <h1>{{ .Name }}</h1>
             </div>
             {{ range .Cities }}
-                {{ .CityName }}
+                 <h3>{{ .CityName }} </h3>
+                {{ range .Artists }}
+                    {{ .Name}}
+                {{ end }}
+
             {{ end }}
     </div>
     {{ end }}
