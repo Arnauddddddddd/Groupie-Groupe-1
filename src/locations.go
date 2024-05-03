@@ -42,6 +42,16 @@ func (g *Structure) setArtistsByCountry() {
 	}
 }
 
+func (g *Structure) fullMaj() {
+	for i := 0; i < len(g.countries); i++ {
+		g.countries[i].Name = strings.Title(strings.Replace(g.countries[i].Name, "_", "-", -1))
+		for j := 0; j < len(g.countries[i].Cities); j++ {
+			g.countries[i].Cities[j].CityName = strings.Title(strings.Replace(g.countries[i].Cities[j].CityName, "_", "-", -1))
+		}
+	}
+}
+
+
 
 
 func containsContry(arr []CountriesStruct, element string) bool {
