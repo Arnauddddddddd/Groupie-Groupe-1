@@ -59,6 +59,7 @@ func (g *Structure) Api() {
 		g.getRelations(i)
 	}
 	g.artistsTemp = g.artists
+	g.getPlaces()
 }
 
 func (g *Structure) getArtists(i int) {
@@ -117,6 +118,8 @@ func (g *Structure) getRelations(i int) {
 	}
 	g.artists[i-1].Relations = relationStruct
 }
+
+
 
 
 

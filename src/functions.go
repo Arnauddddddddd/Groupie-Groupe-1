@@ -63,4 +63,3 @@ func sortType(list []ArtistsStruct, i int, j int, action string) bool {
 	return false
 }
 
-

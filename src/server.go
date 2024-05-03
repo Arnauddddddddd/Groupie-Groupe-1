@@ -46,10 +46,6 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	if len(search) > 0 {
 		g.searchGroup(search)
 	}
-
-
-
-
 	web := WebStruct{Artists: g.artistsTemp,}
 	err := tmpl.Execute(w, web)
 	if err != nil {

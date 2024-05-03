@@ -5,6 +5,7 @@ type Structure struct {
 	artistsTemp   []ArtistsStruct
 	numberOfGroup int
 	action		  string
+	countries	  []CountriesStruct
 }
 
 func (g *Structure) Run() {
