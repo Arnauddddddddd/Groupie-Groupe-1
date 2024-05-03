@@ -10,10 +10,14 @@ type WebStruct struct {
 	Artists []ArtistsStruct
 }
 
+type WebStruct2 struct {
+	Countries []CountriesStruct
+}
 
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
 	http.HandleFunc("/index.html", g.index)
+	http.HandleFunc("/locations.html", g.locations)
 	http.Handle("/videos/", http.StripPrefix("/videos/", http.FileServer(http.Dir("videos"))))
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
 
@@ -48,9 +52,15 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	}
 	web := WebStruct{Artists: g.artistsTemp,}
 	err := tmpl.Execute(w, web)
-	if err != nil {
-		return
-	}
+	if err != nil {return}
+}
+
+
+func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("pages/locations.html"))
+	web2 := WebStruct2{Countries: g.countries,}
+	err := tmpl.Execute(w, web2)
+	if err != nil {return}
 }
 
 
