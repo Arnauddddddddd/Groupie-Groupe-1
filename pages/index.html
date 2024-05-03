@@ -20,25 +20,23 @@
         <h1>Groupie Tracker</h1>
     </header>
 
-        <div>
+        <div class="container">
             <form>
-                <div class="input-group">
                     <input type="text" name="search">
                     <button class="searchButton" type="submit" name="search">Rechercher</button>
-                </div>
             </form>
         </div>
 
-        <div>
+        <div class="container">
             <form action="/index">
-                <button class="searchButton" type="submit" name="action" value="sortYear"> Trie par Année </button>
-                <button class="searchButton" type="submit" name="action" value="sortAlphabetic"> Trie Alphabétique </button>
-                <button class="searchButton" type="submit" name="action" value="reverse"> inverse le trie </button>
-                <button class="searchButton" type="submit" name="action" value="clear"> clear </button>
+                <button class="filterButton" type="submit" name="action" value="sortYear"> Trier par année </button>
+                <button class="filterButton" type="submit" name="action" value="sortAlphabetic"> Trier par ordre alphabétique </button>
+                <button class="filterButton" type="submit" name="action" value="reverse"> Trier par inversion </button>
+                <button class="filterButton" type="submit" name="action" value="clear"> Supprimer </button>
             </form>
         </div>
 
-    <div>
+    <div class="container">
         {{ range .Artists }}
         <div class="card">
             <div>

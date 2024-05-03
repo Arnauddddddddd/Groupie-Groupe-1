@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #1D1C1A;
 }
 
 .navigation {
@@ -9,7 +10,7 @@ body {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px 0;
-    background: radial-gradient(circle, rgba(107,55,193,0.75) 0%, rgba(0,0,0,0.75) 100%);
+    background: radial-gradient(circle, rgba(131, 102, 244, 0.75) 0%, rgba(29, 28, 26, 0.75) 100%);
     overflow: hidden;
     z-index: 100;
 }
@@ -53,78 +54,65 @@ video {
     background-size: cover;
 }
 
-div {
+.container {
     padding-top: 2%;
     z-index: 1;
-    background-color: white;
     display: flex;
+    background-color: #1D1C1A;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    background-color: #ffffff;
-    color: black;
+    background-color: #1A1B1D;
+    color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgb(131, 102, 244);
     transition: 0.3s;
     width: 500px;
-    height: 300px;
+    height: auto;
     margin: 20px;
     padding: 20px;
     display: inline-block;
 }
 
-/* Search Bar */
-form {
-    max-width: 80%;
-    margin: 0 auto;
-    position: relative;
-}
-
-.input-group {
-    position: relative;
-}
-
-label {
-    position: absolute;
-    right: 2%;
-    top: 50%;
-    transform: translatey(-50%);
-    color: rgba(0, 0, 0, 0.08);
-    transition: all 0.2s ease;
-}
-
+/* ------------------------ Search Bar ------------------------ */
 input {
-    width: 100%;
-    padding: 8px 30px 8px 12px;
+    flex: 1;
+    padding: 8px 12px;
     border: 2px solid rgba(0, 0, 0, 0.08);
     outline: none;
     font-size: 16px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.06);
-    color: #6b37c1;
-    font-weight: bold;
+    color: #8366f4;
     letter-spacing: 1px;
     border-radius: 1px;
     transition: all 0.2s ease;
 }
 
 input:focus {
-    border-color: #6b37c1;
+    border-color: #8366f4;
 }
 
-input:focus + label {
-    transform: scale(1.05) translatey(-50%);
-    color: #6b37c1;
-}
-
-.searchButton {
-    background: #6b37c1;
+.filterButton {
+    background: #8366f4;
     color: white;
-    border: none;
-    padding: 8px 15px;
+    padding: 8px 12px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
     font-size: 16px;
     cursor: pointer;
     transition: all 0.2s ease;
+    border-radius: 1px;
+}
+
+.searchButton {
+    background: #8366f4;
+    color: white;
+    padding: 8px 12px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 1px;
 }
