@@ -4,33 +4,28 @@ body {
     background-color: #1D1C1A;
 }
 
-.navigation {
-    position: fixed;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px 0;
+#navigation {
     background: radial-gradient(circle, rgba(131, 102, 244, 0.75) 0%, rgba(29, 28, 26, 0.75) 100%);
-    overflow: hidden;
-    z-index: 100;
+    box-shadow: 0 4px 8px 0 rgb(131, 102, 244);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: top 0.3s;
+    display: flex;
+    justify-content: center;
 }
 
-.left-menu {
+#navigation a {
     float: left;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navigation li {
-    display: inline;
-    margin: 0 20px;
-}
-
-.navigation li a {
-    color: #ffffff;
+    color: #f2f2f2;
+    padding: 15px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 17px;
+}
+
+#navigation a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
 header {

@@ -20,10 +20,13 @@ func (g *Structure) Server() {
 	http.HandleFunc("/locations.html", g.locations)
 	http.Handle("/videos/", http.StripPrefix("/videos/", http.FileServer(http.Dir("videos"))))
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
+	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("scripts"))))
 
 	fmt.Println("\nhttp://localhost:8080/")
 	err := http.ListenAndServe(":8080", nil)
-	if err != nil {return}
+	if err != nil {
+		return
+	}
 }
 
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
@@ -50,19 +53,18 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	if len(search) > 0 {
 		g.searchGroup(search)
 	}
-	web := WebStruct{Artists: g.artistsTemp,}
+	web := WebStruct{Artists: g.artistsTemp}
 	err := tmpl.Execute(w, web)
-	if err != nil {return}
+	if err != nil {
+		return
+	}
 }
-
-
-
 
 func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/locations.html"))
-	web2 := WebStruct2{Countries: g.countries,}
+	web2 := WebStruct2{Countries: g.countries}
 	err := tmpl.Execute(w, web2)
-	if err != nil {return}
+	if err != nil {
+		return
+	}
 }
-
-
