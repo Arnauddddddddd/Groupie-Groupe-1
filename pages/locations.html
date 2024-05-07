@@ -32,9 +32,13 @@
             {{ range .Cities }}
                  <h3>{{ .CityName }} </h3>
                 {{ range .Artists }}
-                    {{ .Name}}
-                {{ end }}
+                    {{ .Name }}
+                    <br>
+                    {{ .Dates }}
+                    <br>
+                    <br>
 
+                {{ end }}
             {{ end }}
     </div>
     {{ end }}

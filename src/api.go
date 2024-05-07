@@ -1,8 +1,8 @@
 package engine
 
 import (
-	//"encoding/json"
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -21,6 +21,8 @@ type ArtistsStruct struct {
 	Locations 	 LocationsStruct	`json:"locations"`
 	ConcertDates DatesStruct		`json:"concertDates"`
 	Relations    RelationStruct		`json:"relations"`
+	Dates       [][]string
+
 }
 
 type LocationsStruct struct {
@@ -61,7 +63,9 @@ func (g *Structure) Api() {
 	g.artistsTemp = g.artists
 	g.getPlaces()
 	g.setArtistsByCountry()
+	g.dateForCity()
 	g.fullMaj()
+	fmt.Println(g.countries[0].Cities[0].Artists[0].ConcertDates)
 }
 
 func (g *Structure) getArtists(i int) {

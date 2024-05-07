@@ -15,6 +15,7 @@ type CitiesStruct struct {
 }
 
 
+
 func (g *Structure) getPlaces() {
 	for i := 0; i < len(g.artists); i++ {
 		for j := 0; j < len(g.artists[i].Locations.Locations); j++ {
@@ -47,6 +48,18 @@ func (g *Structure) fullMaj() {
 		g.countries[i].Name = strings.Title(strings.Replace(g.countries[i].Name, "_", "-", -1))
 		for j := 0; j < len(g.countries[i].Cities); j++ {
 			g.countries[i].Cities[j].CityName = strings.Title(strings.Replace(g.countries[i].Cities[j].CityName, "_", "-", -1))
+		}
+	}
+}
+
+
+func (g *Structure) dateForCity() {
+	for i := 0; i < len(g.countries); i++ {
+		for j := 0; j < len(g.countries[i].Cities); j++ {
+			for k := 0; k < len(g.countries[i].Cities[j].Artists); k++ {
+				city := g.countries[i].Cities[j].Artists[k].Relations.DatesLocations[g.countries[i].Cities[j].CityName + "-" + g.countries[i].Name]
+				g.countries[i].Cities[j].Artists[k].Dates = append(g.countries[i].Cities[j].Artists[k].Dates, city)
+			}
 		}
 	}
 }
