@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 type WebStruct struct {
@@ -53,6 +54,25 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	if len(search) > 0 {
 		g.searchGroup(search)
 	}
+
+    btnFiltreDateCreation := r.Form.Get("filterDateCreation")
+	if len(btnFiltreDateCreation) > 0 {
+		date, _ := strconv.Atoi(btnFiltreDateCreation)
+		g.filterDateCreation(date)
+	}
+
+	btnFiltreFirstAlbum := r.Form.Get("filterFirstAlbum")
+	if len(btnFiltreFirstAlbum) > 0 {
+		date, _ := strconv.Atoi(btnFiltreFirstAlbum)
+		g.filterFirstAlbum(date)
+	}
+
+	btnFiltreNumberMembers:= r.Form.Get("filterNumberMembers")
+	if len(btnFiltreNumberMembers) > 0 {
+		nb, _ := strconv.Atoi(btnFiltreNumberMembers)
+		g.numberMembers(nb)
+	}
+
 	web := WebStruct{Artists: g.artistsTemp}
 	err := tmpl.Execute(w, web)
 	if err != nil {

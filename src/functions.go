@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"strconv"
 	"strings"
 )
 
@@ -37,6 +38,35 @@ func (g *Structure) searchGroup(str string) {
 		}
     }
 }
+
+func (g *Structure) filterDateCreation(date int) {
+	g.artistsTemp = []ArtistsStruct{} 
+	for _, artist := range g.artists {
+		if (artist.CreationDate == date) {
+			g.artistsTemp = append(g.artistsTemp, artist)
+		}
+	}
+}
+
+func (g *Structure) filterFirstAlbum(date int) {
+	g.artistsTemp = []ArtistsStruct{} 
+	for _, artist := range g.artists {
+		dateArtist, _ := strconv.Atoi(artist.FirstAlbum[6:])
+		if (dateArtist == date) {
+			g.artistsTemp = append(g.artistsTemp, artist)
+		}
+	}
+}
+
+func (g *Structure) numberMembers(nb int) {
+	g.artistsTemp = []ArtistsStruct{} 
+	for _, artist := range g.artists {
+		if (len(artist.Members) == nb) {
+			g.artistsTemp = append(g.artistsTemp, artist)
+		}
+	}
+}
+
 
 
 func (g *Structure) clearArtists() {
