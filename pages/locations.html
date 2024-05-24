@@ -23,7 +23,17 @@
 
 
     <div class="container">
+
         {{ range .Countries }}
+            <button>  {{ .Name }}  </button>
+        {{ end }}
+
+
+
+
+
+        {{ range .Countries }}
+
         <div class="card">
             
             <div>
@@ -32,13 +42,12 @@
             {{ range .Cities }}
                  <h3>{{ .CityName }} </h3>
                 {{ range .Artists }}
-                    {{ .Name }}
+                    {{ .Name}}
                     <br>
-                    {{ .Dates }}
-                    <br>
-                    <br>
-
+                    {{ .Dates}}
+                    <br><br>
                 {{ end }}
+
             {{ end }}
     </div>
     {{ end }}
