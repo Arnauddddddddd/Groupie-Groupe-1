@@ -12,7 +12,8 @@ type WebStruct struct {
 }
 
 type WebStruct2 struct {
-	Countries []CountriesStruct
+	Countries 	 []CountriesStruct
+	CountriesTemp []CountriesStruct
 }
 
 func (g *Structure) Server() {
@@ -81,10 +82,20 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 }
 
 func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
 	tmpl := template.Must(template.ParseFiles("pages/locations.html"))
-	web2 := WebStruct2{Countries: g.countries}
-	err := tmpl.Execute(w, web2)
-	if err != nil {
-		return
+
+	showMovies := r.Form.Get("showMovies")
+	if len(showMovies) > 0 {
+		if showMovies == "allMovies" {
+			g.countriesTemp = g.countries
+		} else {
+			g.addOrRemove(showMovies)
+		}
 	}
+	
+	web2 := WebStruct2{Countries: g.countries, CountriesTemp: g.countriesTemp}
+	err := tmpl.Execute(w, web2)
+	if err != nil {return}
+
 }

@@ -94,3 +94,14 @@ func getIndiceCountryByName(arr []CountriesStruct, name string) int{
 	return 0 
 }
 
+func (g *Structure) addOrRemove(country string) {
+	g.countriesTemp = []CountriesStruct{}
+	for i := 0; i < len(g.countries); i++ {
+		if g.countries[i].Name == country {
+			g.countriesTemp = append(g.countriesTemp, g.countries[i])
+		}
+	}
+
+	
+}
+

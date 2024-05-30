@@ -2,7 +2,6 @@ package engine
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -65,7 +64,7 @@ func (g *Structure) Api() {
 	g.setArtistsByCountry()
 	g.dateForCity()
 	g.fullMaj()
-	fmt.Println(g.countries[0].Cities[0].Artists[0].ConcertDates)
+	g.countriesTemp = g.countries
 }
 
 func (g *Structure) getArtists(i int) {

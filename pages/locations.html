@@ -21,19 +21,37 @@
         <h1>Groupie Tracker</h1>
     </header>
 
+
     <div class="container">
-    <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-        {{ range .Countries }}
-            <button class="btn" onclick="filterSelection('{{ .Name }}')"> {{ .Name }} </button>
-        {{ end }}
+
+        <form>
+            <button class="searchButton" type="submit" name="showMovies" value="allMovies"> all Countries </button>
+        </form>
     </div>
+    <div class="container">
         {{ range .Countries }}
-        <div class="filterDiv {{ .Name }} " >
+        <form>
+            <button class="searchButton" type="submit" name="showMovies" value="{{ .Name }}">{{ .Name }}</button>
+        </form>
+    {{ end }}
 
+    </div>
+    
+
+        
+
+
+    <div class="container">  
+
+
+        {{ range .CountriesTemp }}
+
+        <div class="card">
+            
+            <div>
+                <h1>{{ .Name }}</h1>
+            </div>
             {{ range .Cities }}
-                <div class="card"> 
-
                  <h3>{{ .CityName }} </h3>
                 {{ range .Artists }}
                     {{ .Name}}
@@ -41,11 +59,11 @@
                     {{ .Dates}}
                     <br><br>
                 {{ end }}
-                </div>
 
             {{ end }}
+            </div>
+        {{ end }}
+        </div>
     </div>
-    {{ end }}
-</div>
 <script src="../scripts/index.js"></script>
 </body>

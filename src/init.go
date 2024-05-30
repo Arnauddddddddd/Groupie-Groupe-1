@@ -6,4 +6,5 @@ func (g *Structure) Init() {
 	g.numberOfGroup = 0
 	g.action = ""
 	g.countries = []CountriesStruct{}
+	g.countriesTemp = []CountriesStruct{}
 }
