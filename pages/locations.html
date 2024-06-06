@@ -21,23 +21,37 @@
         <h1>Groupie Tracker</h1>
     </header>
 
-<div class="containerDropMenu">
-    <div class="dropdown">
-        <button class="searchButton">Select Country</button>
-        <div class="dropdown-content">
-            <input type="text" id="searchInput" class="search-bar" onkeyup="filterCountries()" placeholder="Search countries">
-                <form>
-                    <button class="searchButton" type="submit" name="showMovies" value="allMovies"> All Countries </button>
-                    {{ range .Countries }}
-                    <button type="submit" name="showMovies" value="{{ .Name }}">{{ .Name }}</button>
-                    {{ end }}
-                </form>
+    <div class="containerDropMenu">
+        <div class="dropdown">
+            <button class="searchButton">Select Country</button>
+            <div class="dropdown-content">
+                <input type="text" id="searchInput" class="search-bar" onkeyup="filterCountries()" placeholder="Search countries">
+                    <form>
+                        <button class="searchButton" type="submit" name="showMovies" value="allMovies"> All Countries </button>
+                        {{ range .Countries }}
+                        <button type="submit" name="showMovies" value="{{ .Name }}">{{ .Name }}</button>
+                        {{ end }}
+                    </form>
+            </div>
         </div>
-    </div>
-</div>
-    
+    </div> 
 
-        
+    <script>
+        function filterCountries() {
+            var input, filter, forms, buttons, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            forms = document.getElementsByClassName("dropdown-content")[0].getElementsByTagName("form");
+            for (i = 0; i < forms.length; i++) {
+                buttons = forms[i].getElementsByTagName("button")[0];
+                if (buttons.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    forms[i].style.display = "";
+                } else {
+                    forms[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 
     <div class="container">  

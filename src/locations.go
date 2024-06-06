@@ -64,6 +64,16 @@ func (g *Structure) dateForCity() {
 	}
 }
 
+func (g *Structure) sortCountries() {
+	for i := 0; i < len(g.countries); i++ {
+		for j := 0; j < len(g.countries)-1; j++ {
+			if g.countries[i].Name < g.countries[j].Name {
+				g.countries[i], g.countries[j] = g.countries[j], g.countries[i]
+			}
+		}
+	}
+}
+
 
 
 
@@ -101,7 +111,5 @@ func (g *Structure) addOrRemove(country string) {
 			g.countriesTemp = append(g.countriesTemp, g.countries[i])
 		}
 	}
-
-	
 }
 

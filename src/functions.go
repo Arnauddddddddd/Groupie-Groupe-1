@@ -86,7 +86,6 @@ func sortType(list []ArtistsStruct, i int, j int, action string) bool {
 	switch action {
 	case "Year":
 		return list[i].CreationDate < list[j].CreationDate
-		//return list[i].FirstAlbum[len(list[i].FirstAlbum)-4:] < list[j].FirstAlbum[len(list[j].FirstAlbum)-4:]
 	case "Alphabet":
 		return list[i].Name < list[j].Name
 	}

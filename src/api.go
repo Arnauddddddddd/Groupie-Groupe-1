@@ -64,6 +64,7 @@ func (g *Structure) Api() {
 	g.setArtistsByCountry()
 	g.dateForCity()
 	g.fullMaj()
+	g.sortCountries()
 	g.countriesTemp = g.countries
 }
 
