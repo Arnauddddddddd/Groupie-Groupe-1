@@ -35,32 +35,32 @@
         </div>
 
     <div class="containerStart">
-        <form id="yearFilterForm">
+        <form>
             <label for="minYear">Min:</label>
             <input type="number" id="minYear" name="minYear" min="1900" max="2099" step="1">
             <label for="maxYear">Max:</label>
             <input type="number" id="maxYear" name="maxYear" min="1900" max="2099" step="1">
-            <button class="searchButtonFilter" type="button" onclick="filterByYear()">Filtre Artiste par année</button>
+            <button class="searchButtonFilter" type="submit" name="yearFilterForm" value="action">Filtre Artiste par année</button>
         </form>
     </div>
 
     <div class="containerStart">
-        <form id="filterFirstAlbumForm">
+        <form>
             <label for="minFirstAlbumYear">Min:</label>
             <input type="number" id="minFirstAlbumYear" name="minFirstAlbumYear" min="1900" max="2099" step="1">
             <label for="maxFirstAlbumYear">Max:</label>
             <input type="number" id="maxFirstAlbumYear" name="maxFirstAlbumYear" min="1900" max="2099" step="1">
-            <button class="searchButtonFilter" type="button" onclick="filterFirstAlbum()">Filtrer par premier album</button>
+            <button class="searchButtonFilter" type="submit" name="filterFirstAlbumForm" value="action">Filtrer par premier album</button>
         </form>
     </div>
 
     <div class="containerStart">
-        <form id="filterNumberMembersForm">
+        <form>
             <label for="minNumberMembers">Min:</label>
             <input type="number" id="minNumberMembers" name="minNumberMembers" min="1" step="1">
             <label for="maxNumberMembers">Max:</label>
             <input type="number" id="maxNumberMembers" name="maxNumberMembers" min="1" step="1">
-            <button class="searchButtonFilter" type="button" onclick="filterNumberMembers()">Filtrer par nombre de membres</button>
+            <button class="searchButtonFilter" type="submit" name="filterNumberMembersForm" value="action"> Filtrer par nombre de membres</button>
         </form>
     </div>
 

@@ -39,29 +39,29 @@ func (g *Structure) searchGroup(str string) {
     }
 }
 
-func (g *Structure) filterDateCreation(date int) {
+func (g *Structure) filterDateCreation(date int, date2 int) {
 	g.artistsTemp = []ArtistsStruct{} 
 	for _, artist := range g.artists {
-		if (artist.CreationDate == date) {
+		if (artist.CreationDate >= date && artist.CreationDate <= date2) {
 			g.artistsTemp = append(g.artistsTemp, artist)
 		}
 	}
 }
 
-func (g *Structure) filterFirstAlbum(date int) {
+func (g *Structure) filterFirstAlbum(date int, date2 int) {
 	g.artistsTemp = []ArtistsStruct{} 
 	for _, artist := range g.artists {
 		dateArtist, _ := strconv.Atoi(artist.FirstAlbum[6:])
-		if (dateArtist == date) {
+		if (dateArtist >= date && dateArtist <= date2) {
 			g.artistsTemp = append(g.artistsTemp, artist)
 		}
 	}
 }
 
-func (g *Structure) numberMembers(nb int) {
+func (g *Structure) numberMembers(nb int, nb2 int) {
 	g.artistsTemp = []ArtistsStruct{} 
 	for _, artist := range g.artists {
-		if (len(artist.Members) == nb) {
+		if (len(artist.Members) >= nb && len(artist.Members) <= nb2) {
 			g.artistsTemp = append(g.artistsTemp, artist)
 		}
 	}
