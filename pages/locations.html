@@ -34,30 +34,31 @@
                     </form>
             </div>
         </div>
-    </div> 
+    </div>
 
-    <div class="container">  
+    <div class="container">
         {{ range .CountriesTemp }}
-<div class="cardCountries">
-    <div>
-        <h1>{{ .Name }}</h1>
-        {{ range .Cities }}
-            <h3>{{ .CityName }}</h3>
-            {{ range .Artists }}
+        <div class="cardCountries">
+          <div>
+                <h1>{{ .Name }}</h1>
+                {{ range .Cities }}
+                <h3>{{ .CityName }}</h3>
+                {{ range .Artists }}
                 {{ .Name}}<br>
                 {{ .Dates}}<br><br>
-            {{ end }}
-        {{ end }}
-    </div>
-    <div id="map-{{ .Name }}" class="map-container" data-country="{{ .Name }}">
-        <div class="map" style="height: 300px;"></div>
-        {{ range .Cities }}
-            <div class="city" data-city="{{ .CityName }}"></div>
-        {{ end }}
+                {{ end }}
+                {{ end }}
+            </div>
+            <div id="map-{{ .Name }}" class="map-container" data-country="{{ .Name }}">
+                <div class="map"></div>
+                {{ range .Cities }}
+                <div class="city" data-city="{{ .CityName }}"></div>
+                {{ end }}
+            </div>
         </div>
+        {{ end }}
     </div>
-    {{ end }}
-</div>
+
 
 <script src="../scripts/index.js"></script>
 <script src="../scripts/map.js"></script>

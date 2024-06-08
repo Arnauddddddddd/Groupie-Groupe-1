@@ -24,3 +24,41 @@ function filterCountries() {
         }
     }
 }
+
+function filterByYear() {
+    var minYear = document.getElementById("minYear").value;
+    var maxYear = document.getElementById("maxYear").value;
+
+    if (!minYear || !maxYear) {
+        alert("Veuillez sélectionner les deux années.");
+        return;
+    }
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("minYear", minYear);
+    url.searchParams.set("maxYear", maxYear);
+
+    window.location.href = url.toString();
+}
+
+function filterFirstAlbum() {
+    var minYear = document.querySelector('[name="minFirstAlbumYear"]').value;
+    var maxYear = document.querySelector('[name="maxFirstAlbumYear"]').value;
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("minFirstAlbumYear", minYear);
+    url.searchParams.set("maxFirstAlbumYear", maxYear);
+
+    window.location.href = url.toString();
+}
+
+function filterNumberMembers() {
+    var minMembers = document.querySelector('[name="minNumberMembers"]').value;
+    var maxMembers = document.querySelector('[name="maxNumberMembers"]').value;
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("minNumberMembers", minMembers);
+    url.searchParams.set("maxNumberMembers", maxMembers);
+
+    window.location.href = url.toString();
+}
