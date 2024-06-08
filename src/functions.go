@@ -6,7 +6,6 @@ import (
 )
 
 func (g *Structure) reverse() {
-	g.artistsTemp = g.artists
 	for i, j := 0, len(g.artistsTemp)-1; i < j; i, j = i+1, j-1 {
 		g.artistsTemp[i], g.artistsTemp[j] = g.artistsTemp[j], g.artistsTemp[i]
 	}
@@ -14,7 +13,6 @@ func (g *Structure) reverse() {
 
 
 func (g *Structure) sortArtists(action string) {
-	g.artistsTemp = g.artists
 	for i := 0; i < len(g.artistsTemp); i++ {
 		for j := 0; j < len(g.artistsTemp)-1; j++ {
 			if sortType(g.artistsTemp, i , j , action) {
@@ -40,31 +38,34 @@ func (g *Structure) searchGroup(str string) {
 }
 
 func (g *Structure) filterDateCreation(date int, date2 int) {
-	g.artistsTemp = []ArtistsStruct{} 
-	for _, artist := range g.artists {
+	artistsTemp2 := []ArtistsStruct{} 
+	for _, artist := range g.artistsTemp {
 		if (artist.CreationDate >= date && artist.CreationDate <= date2) {
-			g.artistsTemp = append(g.artistsTemp, artist)
+			artistsTemp2 = append(artistsTemp2, artist)
 		}
 	}
+	g.artistsTemp = artistsTemp2
 }
 
 func (g *Structure) filterFirstAlbum(date int, date2 int) {
-	g.artistsTemp = []ArtistsStruct{} 
-	for _, artist := range g.artists {
+	artistsTemp2 := []ArtistsStruct{} 
+	for _, artist := range g.artistsTemp {
 		dateArtist, _ := strconv.Atoi(artist.FirstAlbum[6:])
 		if (dateArtist >= date && dateArtist <= date2) {
-			g.artistsTemp = append(g.artistsTemp, artist)
+			artistsTemp2 = append(artistsTemp2, artist)
 		}
 	}
+	g.artistsTemp = artistsTemp2
 }
 
 func (g *Structure) numberMembers(nb int, nb2 int) {
-	g.artistsTemp = []ArtistsStruct{} 
-	for _, artist := range g.artists {
+	artistsTemp2 := []ArtistsStruct{} 
+	for _, artist := range g.artistsTemp {
 		if (len(artist.Members) >= nb && len(artist.Members) <= nb2) {
-			g.artistsTemp = append(g.artistsTemp, artist)
+			artistsTemp2 = append(artistsTemp2, artist)
 		}
 	}
+	g.artistsTemp = artistsTemp2
 }
 
 
