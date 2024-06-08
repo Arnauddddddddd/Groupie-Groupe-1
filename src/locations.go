@@ -5,26 +5,28 @@ import (
 )
 
 type CountriesStruct struct {
-	Name string
+	Name   string
 	Cities []CitiesStruct
 }
 
 type CitiesStruct struct {
 	CityName string
-	Artists []ArtistsStruct
+	Artists  []ArtistsStruct
 }
-
-
 
 func (g *Structure) getPlaces() {
 	for i := 0; i < len(g.artists); i++ {
 		for j := 0; j < len(g.artists[i].Locations.Locations); j++ {
 			temp := strings.Split(g.artists[i].Locations.Locations[j], "-")
-			country := CountriesStruct{Name: temp[1],}
-			city := CitiesStruct{CityName: temp[0],}
-			if !containsContry(g.countries, temp[1]) {g.countries = append(g.countries, country)}
+			country := CountriesStruct{Name: temp[1]}
+			city := CitiesStruct{CityName: temp[0]}
+			if !containsContry(g.countries, temp[1]) {
+				g.countries = append(g.countries, country)
+			}
 			indice := getIndiceCountryByName(g.countries, country.Name)
-			if !containsCity(g.countries[indice].Cities, city) {g.countries[indice].Cities = append(g.countries[indice].Cities, city)}
+			if !containsCity(g.countries[indice].Cities, city) {
+				g.countries[indice].Cities = append(g.countries[indice].Cities, city)
+			}
 		}
 	}
 }
@@ -33,7 +35,7 @@ func (g *Structure) setArtistsByCountry() {
 	for i := 0; i < len(g.artists); i++ {
 		for j := 0; j < len(g.artists[i].Locations.Locations); j++ {
 			temp := strings.Split(g.artists[i].Locations.Locations[j], "-")
-			indice := getIndiceCountryByName(g.countries ,temp[1])
+			indice := getIndiceCountryByName(g.countries, temp[1])
 			for k := 0; k < len(g.countries[indice].Cities); k++ {
 				if g.countries[indice].Cities[k].CityName == temp[0] {
 					g.countries[indice].Cities[k].Artists = append(g.countries[indice].Cities[k].Artists, g.artists[i])
@@ -52,16 +54,53 @@ func (g *Structure) fullMaj() {
 	}
 }
 
-
 func (g *Structure) dateForCity() {
 	for i := 0; i < len(g.countries); i++ {
 		for j := 0; j < len(g.countries[i].Cities); j++ {
 			for k := 0; k < len(g.countries[i].Cities[j].Artists); k++ {
-				city := g.countries[i].Cities[j].Artists[k].Relations.DatesLocations[g.countries[i].Cities[j].CityName + "-" + g.countries[i].Name]
+				city := g.countries[i].Cities[j].Artists[k].Relations.DatesLocations[g.countries[i].Cities[j].CityName+"-"+g.countries[i].Name]
+				for m := 0; m < len(city); m++ {
+					city[m] = g.changeFormatDate(city[m])
+				}
 				g.countries[i].Cities[j].Artists[k].Dates = append(g.countries[i].Cities[j].Artists[k].Dates, city)
 			}
 		}
 	}
+}
+
+func (g *Structure) changeFormatDate(date string) string {
+	date2 := strings.Split(date, "-")
+	if len(date2) != 3 {
+		return date
+	}
+	month := ""
+	switch date2[1] {
+	case "01":
+		month = "January"
+	case "02":
+		month = "Februry"
+	case "03":
+		month = "March"
+	case "04":
+		month = "April"
+	case "05":
+		month = "May"
+	case "06":
+		month = "June"
+	case "07":
+		month = "July"
+	case "08":
+		month = "August"
+	case "09":
+		month = "September"
+	case "10":
+		month = "October"
+	case "11":
+		month = "November"
+	case "12":
+		month = "December"
+	}
+	return date2[0] + (", ") + month + " " + date2[2]
 }
 
 func (g *Structure) sortCountries() {
@@ -73,9 +112,6 @@ func (g *Structure) sortCountries() {
 		}
 	}
 }
-
-
-
 
 func containsContry(arr []CountriesStruct, element string) bool {
 	for i := 0; i < len(arr); i++ {
@@ -95,13 +131,13 @@ func containsCity(arr []CitiesStruct, element CitiesStruct) bool {
 	return false
 }
 
-func getIndiceCountryByName(arr []CountriesStruct, name string) int{
+func getIndiceCountryByName(arr []CountriesStruct, name string) int {
 	for i := 0; i < len(arr); i++ {
 		if arr[i].Name == name {
 			return i
 		}
 	}
-	return 0 
+	return 0
 }
 
 func (g *Structure) addOrRemove(country string) {
@@ -112,4 +148,3 @@ func (g *Structure) addOrRemove(country string) {
 		}
 	}
 }
-
