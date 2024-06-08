@@ -21,7 +21,6 @@ type WebStruct2 struct {
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
 	http.HandleFunc("/index.html", g.index)
-	http.HandleFunc("/map.html", g.mapPage)
 	http.HandleFunc("/locations.html", g.locations)
 	http.Handle("/videos/", http.StripPrefix("/videos/", http.FileServer(http.Dir("videos"))))
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
@@ -103,10 +102,3 @@ func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func (g *Structure) mapPage(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
-	tmpl := template.Must(template.ParseFiles("pages/map.html"))
-	web2 := WebStruct2{Countries: g.countries, CountriesTemp: g.countriesTemp}
-	err := tmpl.Execute(w, web2)
-	if err != nil {return}
-}

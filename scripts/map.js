@@ -1,32 +1,40 @@
-function initMap() {
-	var markers = []; // Nous initialisons la liste des marqueurs
-	// Nous définissons le dossier qui contiendra les marqueurs
-	var iconBase = 'http://localhost/carte/icons/';
-	// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-	macarte = L.map('map').setView([lat, lon], 11);
-	markerClusters = L.markerClusterGroup(); // Nous initialisons les groupes de marqueurs
-	// Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
-	L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-		// Il est toujours bien de laisser le lien vers la source des données
-		attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
-		minZoom: 1,
-		maxZoom: 20
-	}).addTo(macarte);
-	// Nous parcourons la liste des villes
-	for (ville in villes) {
-		// Nous définissons l'icône à utiliser pour le marqueur, sa taille affichée (iconSize), sa position (iconAnchor) et le décalage de son ancrage (popupAnchor)
-		var myIcon = L.icon({
-			iconUrl: iconBase + "autres.png",
-			iconSize: [50, 50],
-			iconAnchor: [25, 50],
-			popupAnchor: [-3, -76],
-		});
-		var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters
-		marker.bindPopup(ville);
-		markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes
-		markers.push(marker); // Nous ajoutons le marqueur à la liste des marqueurs
-	}
-	var group = new L.featureGroup(markers); // Nous créons le groupe des marqueurs pour adapter le zoom
-	macarte.fitBounds(group.getBounds().pad(0.5)); // Nous demandons à ce que tous les marqueurs soient visibles, et ajoutons un padding (pad(0.5)) pour que les marqueurs ne soient pas coupés
-	macarte.addLayer(markerClusters);
+function initializeMaps() {
+    const mapContainers = document.querySelectorAll('.map-container');
+    const geocoder = new google.maps.Geocoder();
+
+    for (let i = 0; i < mapContainers.length; i++) {
+        const mapContainer = mapContainers[i];
+        const country = mapContainer.getAttribute('data-country');
+        const map = new google.maps.Map(mapContainer.querySelector('.map'), {
+            zoom: 5
+        });
+
+    geocoder.geocode({ 'address': country }, function(results, status) {
+    if (status === 'OK') {
+        const countryLocation = results[0].geometry.location;
+        map.setCenter(countryLocation);
+
+        const cities = mapContainer.querySelectorAll('.city');
+        for (let j = 0; j < cities.length; j++) {
+            const cityElement = cities[j];
+            const cityName = cityElement.getAttribute('data-city');
+
+            geocoder.geocode({ 'address': cityName + ', ' + country }, function(results, status) {
+                if (status === 'OK') {
+                    const cityLocation = results[0].geometry.location;
+                    new google.maps.Marker({
+                        position: cityLocation,
+                        map: map,
+                        title: cityName
+                    });
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    } else {
+        console.error('Geocode was not successful for the following reason: ' + status);
+    }
+});
+}
 }

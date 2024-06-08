@@ -4,6 +4,7 @@ body {
     background-color: #1D1C1A;
 }
 
+
 #navigation {
     background: radial-gradient(circle, rgba(131, 102, 244, 0.75) 0%, rgba(29, 28, 26, 0.75) 100%);
     box-shadow: 0 4px 8px 0 rgb(131, 102, 244);
@@ -27,6 +28,10 @@ body {
 #navigation a:hover {
     background-color: #ddd;
     color: black;
+}
+
+.center {
+    text-align: center;
 }
 
 header {
@@ -56,8 +61,8 @@ video {
     display: flex;
     background-color: #1D1C1A;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between; /* Aligner les cartes à droite */
+    align-items: flex-start; /* Aligner les cartes en haut */
     overflow: hidden;
     position: relative;
 }
@@ -142,7 +147,17 @@ h2 {
     height: auto;
     margin: 20px;
     padding: 20px;
-    display: inline-block;
+    display: flex; /* Utiliser flexbox */
+}
+
+.cardCountries > div:first-child {
+    flex: 1; /* Faire en sorte que les informations sur le pays occupent tout l'espace disponible */
+    margin-right: 20px; /* Marge entre les informations sur le pays et la carte */
+}
+
+.map-container {
+    width: 800px; /* Largeur de la carte */
+    height: max-content; /* Hauteur de la carte */
 }
 
 .dropdown {
@@ -193,3 +208,5 @@ h2 {
 .dropdown-content form button:hover {
     background-color: #ddd;
 }
+
+
