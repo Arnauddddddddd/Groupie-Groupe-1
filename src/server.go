@@ -66,6 +66,7 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 			nb, _ := strconv.Atoi(minYear)
 			nb2, _ := strconv.Atoi(maxYear)
 			g.filterDateCreation(nb, nb2)
+		
 		}
 		minFirstAlbumYear := r.Form.Get("minFirstAlbumYear")
 		maxFirstAlbumYear := r.Form.Get("maxFirstAlbumYear")
