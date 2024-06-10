@@ -58,31 +58,29 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 		g.searchGroup(search)
 	}
 
-    btnFiltreDateCreation := r.Form.Get("yearFilterForm")
-	if len(btnFiltreDateCreation) > 0 {
+    filter := r.Form.Get("filter")
+	if len(filter) > 0 {
 		minYear := r.Form.Get("minYear")
 		maxYear := r.Form.Get("maxYear")
-		nb, _ := strconv.Atoi(minYear)
-		nb2, _ := strconv.Atoi(maxYear)
-		g.filterDateCreation(nb, nb2)
-	}
-
-	filterFirstAlbumForm := r.Form.Get("filterFirstAlbumForm")
-	if len(filterFirstAlbumForm) > 0 {
+		if len(minYear) > 0 && len(maxYear) > 0 {
+			nb, _ := strconv.Atoi(minYear)
+			nb2, _ := strconv.Atoi(maxYear)
+			g.filterDateCreation(nb, nb2)
+		}
 		minFirstAlbumYear := r.Form.Get("minFirstAlbumYear")
 		maxFirstAlbumYear := r.Form.Get("maxFirstAlbumYear")
-		nb, _ := strconv.Atoi(minFirstAlbumYear)
-		nb2, _ := strconv.Atoi(maxFirstAlbumYear)
-		g.filterFirstAlbum(nb, nb2)
-	}
-
-	btnFiltreNumberMembers:= r.Form.Get("filterNumberMembersForm")
-	if len(btnFiltreNumberMembers) > 0 {
+		if len(minFirstAlbumYear) > 0 && len(maxFirstAlbumYear) > 0 {
+			nbr, _ := strconv.Atoi(minFirstAlbumYear)
+			nbr2, _ := strconv.Atoi(maxFirstAlbumYear)
+			g.filterFirstAlbum(nbr, nbr2)
+		}
 		maxNumberMembers := r.Form.Get("maxNumberMembers")
 		minNumberMembers := r.Form.Get("minNumberMembers")
-		nb, _ := strconv.Atoi(minNumberMembers)
-		nb2, _ := strconv.Atoi(maxNumberMembers)
-		g.numberMembers(nb, nb2)
+		if len(minNumberMembers) > 0 && len(maxNumberMembers) > 0 {
+			nbmr, _ := strconv.Atoi(minNumberMembers)
+			nbmr2, _ := strconv.Atoi(maxNumberMembers)
+			g.numberMembers(nbmr, nbmr2)
+		}
 	}
 
 	web := WebStruct{Artists: g.artistsTemp}
