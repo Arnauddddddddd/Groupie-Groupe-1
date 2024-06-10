@@ -6,7 +6,10 @@ function initializeMaps() {
         const mapContainer = mapContainers[i];
         const country = mapContainer.getAttribute('data-country');
         const map = new google.maps.Map(mapContainer.querySelector('.map'), {
-            zoom: 5
+            zoom: 5,
+            tilt: 0,
+            streetViewControl: false,
+            mapTypeControl: false,
         });
 
     geocoder.geocode({ 'address': country }, function(results, status) {
