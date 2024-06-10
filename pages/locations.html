@@ -46,8 +46,9 @@
                 {{ range .Artists }}
                 <div>
                     <img src="{{ .Image }}" alt="{{ .Name }}" height="60px", width="60px">
+                    <h4> {{ .Name}}<br> </h4>
+
                 </div>
-                {{ .Name}}<br>
                 {{ range .Dates }}
                     {{ . }}<br>
                 {{ end }}

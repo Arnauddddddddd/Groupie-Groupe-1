@@ -74,8 +74,10 @@
             </div>
             <div>
                 <h2>{{ .Name }}</h2>
-                <h2>{{ .Members }}</h2>
-                <h2>{{ .CreationDate }}</h2>
+                {{ range .Members }}
+                    <h10>{{ . }}</h10> <br>
+                {{ end }}
+                <h2>Date Creation : {{ .CreationDate }}</h2>
 
             </div>
         </div>
