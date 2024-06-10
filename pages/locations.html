@@ -21,26 +21,26 @@
         <h1>Groupie Tracker</h1>
     </header>
 
-    <div class="containerDropMenu">
-        <div class="dropdown">
-            <button class="searchButton">Select Country</button>
-            <div class="dropdown-content">
-                <input type="text" id="searchInput" class="search-bar" onkeyup="filterCountries()" placeholder="Search countries">
-                    <form>
-                        <button class="searchButton" type="submit" name="showMovies" value="allMovies"> All Countries </button>
-                        {{ range .Countries }}
-                        <button type="submit" name="showMovies" value="{{ .Name }}">{{ .Name }}</button>
-                        {{ end }}
-                    </form>
-            </div>
+<div class="containerDropMenu">
+    <div class="dropdown">
+        <button class="searchButton">Select Country</button>
+        <div class="dropdown-content">
+            <input type="text" id="searchInput" class="search-bar" onkeyup="filterCountries()" placeholder="Search countries">
+            <form id="countriesForm">
+                <button class="searchButton" type="submit" name="showMovies" value="allMovies" style="color: #8366f4">All Countries</button>
+                {{ range .Countries }}
+                    <button type="submit" name="showMovies" value="{{ .Name }}" class="country-button">{{ .Name }}</button>
+                {{ end }}
+            </form>
         </div>
     </div>
+</div>
 
     <div class="container">
         {{ range .CountriesTemp }}
         <div class="cardCountries">
           <div>
-                <h1>{{ .Name }}</h1>
+                <h1 class="titleName">{{ .Name }}</h1>
                 {{ range .Cities }}
                 <h3>{{ .CityName }}</h3>
                 {{ range .Artists }}
@@ -50,7 +50,7 @@
 
                 </div>
                 {{ range .Dates }}
-                    {{ . }}<br>
+                    {{ . }}<br><br><hr>
                 {{ end }}
                 <br>
                 {{ end }}

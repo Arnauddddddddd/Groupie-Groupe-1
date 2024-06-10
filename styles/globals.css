@@ -75,6 +75,12 @@ video {
     align-items: center;
 }
 
+.containerFilter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .card {
     background-color: #1A1B1D;
     color: white;
@@ -82,10 +88,18 @@ video {
     box-shadow: 0 4px 8px 0 rgb(131, 102, 244);
     transition: 0.3s;
     width: 500px;
-    height: 500px;
+    height: 550px;
     margin: 20px;
     padding: 20px;
     display: inline-block;
+    text-align: center;
+    align-content: center;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: radial-gradient(circle, rgba(131, 102, 244, 0.75) 0%, rgba(29, 28, 26, 0.75) 100%);
 }
 
 /* ------------------------ Search Bar ------------------------ */
@@ -136,6 +150,14 @@ h2 {
 }
 
 /* ------------------------ DropMenu Countries ------------------------ */
+.titleName {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+    text-decoration: underline #8366f4;
+}
+
 .containerDropMenu {
     padding-top: 2%;
     display: flex;
@@ -156,6 +178,7 @@ h2 {
     height: auto;
     margin: 20px;
     padding: 20px;
+    text-align: center;
 }
 
 .cardCountries > div:first-child {
@@ -224,7 +247,7 @@ h2 {
 
 /* Search bar JS */
 input[type="number"] {
-    width: 100px;
+    width: 75px;
     padding: 8px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -254,20 +277,3 @@ button.searchButtonFilter {
     border-radius: 1px;
     margin: 8px 0;
 }
-}
-  .footer-widget-heading h3 {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 40px;
-    position: relative;
-  }
-  .footer-widget-heading h3::before
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -15px;
-    height: 2px;
-    width: 50px;
-    background: #8366F4;
-  }
