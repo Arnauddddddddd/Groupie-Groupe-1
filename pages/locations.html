@@ -44,8 +44,14 @@
                 {{ range .Cities }}
                 <h3>{{ .CityName }}</h3>
                 {{ range .Artists }}
+                <div>
+                    <img src="{{ .Image }}" alt="{{ .Name }}" height="60px", width="60px">
+                </div>
                 {{ .Name}}<br>
-                {{ .Dates}}<br><br>
+                {{ range .Dates }}
+                    {{ . }}<br>
+                {{ end }}
+                <br>
                 {{ end }}
                 {{ end }}
             </div>
