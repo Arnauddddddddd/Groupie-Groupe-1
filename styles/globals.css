@@ -254,3 +254,20 @@ button.searchButtonFilter {
     border-radius: 1px;
     margin: 8px 0;
 }
+}
+  .footer-widget-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .footer-widget-heading h3::before
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    height: 2px;
+    width: 50px;
+    background: #8366F4;
+  }
