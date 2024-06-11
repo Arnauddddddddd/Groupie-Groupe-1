@@ -14,6 +14,7 @@ type CitiesStruct struct {
 	Artists  []ArtistsStruct
 }
 
+// retrieving all cities and countries from ArtistStruct to extract them into CountryStruct
 func (g *Structure) getPlaces() {
 	for i := 0; i < len(g.artists); i++ {
 		for j := 0; j < len(g.artists[i].Locations.Locations); j++ {
@@ -31,6 +32,7 @@ func (g *Structure) getPlaces() {
 	}
 }
 
+// retrieving all artists to CountryStruct
 func (g *Structure) setArtistsByCountry() {
 	for i := 0; i < len(g.artists); i++ {
 		for j := 0; j < len(g.artists[i].Locations.Locations); j++ {
@@ -45,7 +47,8 @@ func (g *Structure) setArtistsByCountry() {
 	}
 }
 
-func (g *Structure) fullMaj() {
+// remove all tickets from cities
+func (g *Structure) removeTiret() {
 	for i := 0; i < len(g.countries); i++ {
 		g.countries[i].Name = strings.Title(strings.Replace(g.countries[i].Name, "_", "-", -1))
 		for j := 0; j < len(g.countries[i].Cities); j++ {
@@ -54,6 +57,7 @@ func (g *Structure) fullMaj() {
 	}
 }
 
+// this function add all artist dates based on city
 func (g *Structure) dateForCity() {
 	for i := 0; i < len(g.countries); i++ {
 		for j := 0; j < len(g.countries[i].Cities); j++ {
@@ -68,6 +72,7 @@ func (g *Structure) dateForCity() {
 	}
 }
 
+// this function replace date in handwriting
 func (g *Structure) changeFormatDate(date string) string {
 	date2 := strings.Split(date, "-")
 	if len(date2) != 3 {
@@ -103,6 +108,7 @@ func (g *Structure) changeFormatDate(date string) string {
 	return date2[0] + (", ") + month + " " + date2[2]
 }
 
+// this function sorts countries alphabetically 
 func (g *Structure) sortCountries() {
 	for i := 0; i < len(g.countries); i++ {
 		for j := 0; j < len(g.countries)-1; j++ {
@@ -140,7 +146,8 @@ func getIndiceCountryByName(arr []CountriesStruct, name string) int {
 	return 0
 }
 
-func (g *Structure) addOrRemove(country string) {
+// this function adds the country that corresponds to the string in the list of current countries
+func (g *Structure) addCurrentCountries(country string) {
 	g.countriesTemp = []CountriesStruct{}
 	for i := 0; i < len(g.countries); i++ {
 		if g.countries[i].Name == country {

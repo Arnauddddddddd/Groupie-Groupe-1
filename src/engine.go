@@ -9,6 +9,7 @@ type Structure struct {
 	countriesTemp []CountriesStruct
 }
 
+// the main function
 func (g *Structure) Run() {
 	g.Init()
 	g.Api()

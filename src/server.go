@@ -18,6 +18,7 @@ type WebStruct2 struct {
 	CountriesTemp []CountriesStruct
 }
 
+// the function loads the different web pages and files
 func (g *Structure) Server() {
 	http.HandleFunc("/", g.index)
 	http.HandleFunc("/index.html", g.index)
@@ -25,14 +26,12 @@ func (g *Structure) Server() {
 	http.Handle("/videos/", http.StripPrefix("/videos/", http.FileServer(http.Dir("videos"))))
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("scripts"))))
-
 	fmt.Println("\nhttp://localhost:8080/")
 	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		return
-	}
+	if err != nil {return}
 }
 
+// the function allows you to load all the actions of the index page
 func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("pages/index.html"))
 	r.ParseForm()
@@ -52,12 +51,8 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(g.action)
 		}
 	}
-
 	search := r.Form.Get("search")
-	if len(search) > 0 {
-		g.searchGroup(search)
-	}
-
+	if len(search) > 0 {g.searchGroup(search)}
     filter := r.Form.Get("filter")
 	if len(filter) > 0 {
 		minYear := r.Form.Get("minYear")
@@ -66,7 +61,6 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 			nb, _ := strconv.Atoi(minYear)
 			nb2, _ := strconv.Atoi(maxYear)
 			g.filterDateCreation(nb, nb2)
-		
 		}
 		minFirstAlbumYear := r.Form.Get("minFirstAlbumYear")
 		maxFirstAlbumYear := r.Form.Get("maxFirstAlbumYear")
@@ -83,7 +77,6 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 			g.numberMembers(nbmr, nbmr2)
 		}
 	}
-
 	web := WebStruct{Artists: g.artistsTemp}
 	err := tmpl.Execute(w, web)
 	if err != nil {
@@ -91,19 +84,18 @@ func (g *Structure) index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// the function allows you to load all the actions of the locations page
 func (g *Structure) locations(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	tmpl := template.Must(template.ParseFiles("pages/locations.html"))
-
 	showMovies := r.Form.Get("showMovies")
 	if len(showMovies) > 0 {
 		if showMovies == "allMovies" {
 			g.countriesTemp = g.countries
 		} else {
-			g.addOrRemove(showMovies)
+			g.addCurrentCountries(showMovies)
 		}
 	}
-	
 	web2 := WebStruct2{Countries: g.countries, CountriesTemp: g.countriesTemp}
 	err := tmpl.Execute(w, web2)
 	if err != nil {return}

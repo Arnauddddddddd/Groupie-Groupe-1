@@ -70,7 +70,7 @@ func (g *Structure) setLocationStruct() {
 	g.getPlaces()
 	g.setArtistsByCountry()
 	g.dateForCity()
-	g.fullMaj()
+	g.removeTiret()
 	g.sortCountries()
 	g.countriesTemp = g.countries
 }
