@@ -18,7 +18,7 @@
         <video autoplay loop muted>
             <source src="../videos/headervideo.mp4" type="video/mp4">
         </video>
-        <h1>Groupie Tracker</h1>
+        <h1 style="font-weight: normal; font-size: 3em">Groupie Tracker</h1>
     </header>
 
 <div class="containerDropMenu">
@@ -38,11 +38,11 @@
 
     <div class="container">
         {{ range .CountriesTemp }}
+            <h1 class="titleName" style="font-weight: normal; font-size: 2.5em; padding-top: 60px;">{{ .Name }}</h1>
         <div class="cardCountries">
           <div>
-                <h1 class="titleName" style="font-weight: normal">{{ .Name }}</h1>
                 {{ range .Cities }}
-                <h3 style="text-decoration: underline white; font-size: 1.3em;">{{ .CityName }}</h3>
+                <h3 style="font-weight: normal; text-decoration: underline white; font-size: 1.9em;">{{ .CityName }}</h3>
                 {{ range .Artists }}
                 <div>
                     <img src="{{ .Image }}" alt="{{ .Name }}" height="60px", width="60px">
