@@ -16,7 +16,7 @@
         <video autoplay loop muted>
             <source src="../videos/headervideo.mp4" type="video/mp4">
         </video>
-        <h1>Groupie Tracker</h1>
+        <h1 style="font-weight: normal"> Groupie Tracker</h1>
     </header>
 
         <div class="container">
@@ -39,7 +39,7 @@
     <div class="containerStart">
         <form action="/index">
             <div>
-                <h3 class="titleName" style="text-align: center"> Year Filter </h3>
+                <h3 class="titleName" style="font-weight: normal"> Year Filter </h3>
                 <label for="minYear">Min:</label>
                 <input type="number" id="minYear" name="minYear" min="1958" max="2015" step="1" value="1958">
                 <label for="maxYear">Max:</label>
@@ -47,7 +47,7 @@
             </div>
             
             <div>
-                <h3 class="titleName" style="text-align: center"> Year first album </h3>
+                <h3 class="titleName" style="font-weight: normal"> Year first album </h3>
                 <label for="minFirstAlbumYear">Min:</label>
                 <input type="number" id="minFirstAlbumYear" name="minFirstAlbumYear" min="1963" max="2018" step="1" value="1963">
                 <label for="maxFirstAlbumYear">Max:</label>
@@ -55,7 +55,7 @@
             </div>
             
             <div>
-                <h3 class="titleName" style="text-align: center"> Number Members </h3>
+                <h3 class="titleName" style="font-weight: normal"> Number Members </h3>
                 <label for="minNumberMembers">Min:</label>
                 <input type="number" id="minNumberMembers" name="minNumberMembers" min="1" max="8" step="1" value="1">
                 <label for="maxNumberMembers">Max:</label>
@@ -74,11 +74,11 @@
                 <img src="{{ .Image }}" alt="{{ .Name }}">
             </div>
             <div>
-                <h2 class="titleName">{{ .Name }}</h2>
+                <h2 style="font-weight: normal" class="titleName">{{ .Name }}</h2>
                 {{ range .Members }}
                     <h10>{{ . }}</h10> <br>
                 {{ end }}
-                <h3>Date Creation : {{ .CreationDate }}</h3>
+                <h3 style="font-weight: normal">Date Creation : {{ .CreationDate }}</h3>
             </div>
         </div>
         {{ end }}

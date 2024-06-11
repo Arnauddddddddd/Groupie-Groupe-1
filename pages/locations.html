@@ -40,20 +40,21 @@
         {{ range .CountriesTemp }}
         <div class="cardCountries">
           <div>
-                <h1 class="titleName">{{ .Name }}</h1>
+                <h1 class="titleName" style="font-weight: normal">{{ .Name }}</h1>
                 {{ range .Cities }}
-                <h3>{{ .CityName }}</h3>
+                <h3 style="text-decoration: underline white; font-size: 1.3em;">{{ .CityName }}</h3>
                 {{ range .Artists }}
                 <div>
                     <img src="{{ .Image }}" alt="{{ .Name }}" height="60px", width="60px">
-                    <h4> {{ .Name}}<br> </h4>
+                    <h4 style="font-weight: normal"> {{ .Name}}<br> </h4>
 
                 </div>
                 {{ range .Dates }}
-                    {{ . }}<br><br><hr>
+                    {{ . }}<br><br>
                 {{ end }}
                 <br>
                 {{ end }}
+                <hr>
                 {{ end }}
             </div>
             <div id="map-{{ .Name }}" class="map-container" data-country="{{ .Name }}">
